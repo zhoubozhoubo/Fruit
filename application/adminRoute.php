@@ -275,5 +275,17 @@ Route::group('admin', function () use ($afterBehavior) {
             ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);
+    Route::group('GoodsCon', [
+        'index' => [
+            'admin/GoodsCon/index',
+            ['method' => 'get']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
+    Route::group('GoodsTypeCon', [
+        'index' => [
+            'admin/GoodsTypeCon/index',
+            ['method' => 'get']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
     Route::miss('admin/Miss/index');
 });
