@@ -294,6 +294,29 @@ Route::group('admin', function () use ($afterBehavior) {
             ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);
+    //用户地址
+    Route::group('UserAddressCon', [
+        'index' => [
+            'admin/UserAddressCon/index',
+            ['method' => 'get']
+        ],
+        'aoe'   => [
+            'admin/UserAddressCon/aoe',
+            ['method' => 'post']
+        ],
+        'changeDefault'   => [
+            'admin/UserAddressCon/changeDefault',
+            ['method' => 'get']
+        ],
+        'changeStatus'   => [
+            'admin/UserAddressCon/changeStatus',
+            ['method' => 'get']
+        ],
+        'del'   => [
+            'admin/UserAddressCon/del',
+            ['method' => 'get']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
     //商品类型
     Route::group('GoodsTypeCon', [
         'index' => [
