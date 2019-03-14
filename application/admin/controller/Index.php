@@ -2,7 +2,6 @@
 
 namespace app\admin\controller;
 
-
 use app\util\ReturnCode;
 
 class Index extends Base {
@@ -10,6 +9,9 @@ class Index extends Base {
         return json(['welcome']);
     }
 
+    /**
+     * 文件上传
+     */
     public function upload() {
         $path = '/upload/' . date('Ymd', time()) . '/';
         $name = $_FILES['file']['name'];

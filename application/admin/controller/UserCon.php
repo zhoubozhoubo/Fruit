@@ -2,13 +2,13 @@
 
 namespace app\admin\controller;
 
-use app\model\Goods;
+use app\model\User;
 use app\util\ReturnCode;
 
 /**
- * 商品控制器
+ * 用户控制器
  */
-class GoodsCon extends Base
+class UserCon extends Base
 {
 
     /**
@@ -23,23 +23,30 @@ class GoodsCon extends Base
         if (isset($getData['status']) && $getData['status'] !== '') {
             $where['status'] = $getData['status'];
         }
-        if (isset($getData['type_id']) && $getData['type_id'] !== '') {
-            $where['type_id'] = $getData['type_id'];
-        }
-        foreach (['name'] as $key) {
+        foreach (['name,nickname,phone'] as $key) {
             if (isset($getData[$key]) && $getData[$key] !== '') {
-//                $db->whereLike($key, "%{$getData[$key]}%");
                 $where[$key] = ['like', "%{$getData[$key]}%"];
             }
         }
-        $db = Goods::where($where)->field('id,name,img,type_id,money,original_money,other_money,comment,number,recommend,status');
-        return parent::_list($db, ['goodsType']);
+        $db = User::where($where)->field('id,name,nickname,avatarurl,phone,province,city,area,comment,status');
+        return parent::_list($db);
     }
 
     public function _index_data_filter(&$data)
     {
         foreach ($data as &$item) {
-            $item['type_name'] = $item['goodsType']['name'];
+            $item['area'] = [$item['province'], $item['city'], $item['area']];
+            $item['area_com'] = '';
+            if (!empty($item['area'][0])) {
+                $item['area_com'] .= $item['area'][0] . '/';
+                if (!empty($item['area'][1])) {
+                    $item['area_com'] .= $item['area'][1] . '/';
+                    if (!empty($item['area'][2])) {
+                        $item['area_com'] .= $item['area'][2] . '/';
+                    }
+                }
+            }
+            $item['area_com'] .= $item['comment'];
         }
     }
 
@@ -49,10 +56,15 @@ class GoodsCon extends Base
     public function aoe()
     {
         $postData = $this->request->post();
+        $address=$postData['area'];
+        unset($postData['area']);
+        $postData['province'] = $address[0] ?? '';
+        $postData['city'] = $address[1] ?? '';
+        $postData['area'] = $address[2] ?? '';
         if(!isset($postData['id']) || $postData['id'] === 0){
-            $res = Goods::create($postData);
+            $res = User::create($postData);
         }else{
-            $res = Goods::update($postData);
+            $res = User::update($postData);
         }
         if ($res === false) {
             return $this->buildFailed(ReturnCode::DB_SAVE_ERROR, '操作失败');
@@ -64,28 +76,10 @@ class GoodsCon extends Base
     /**
      * 改变数据状态
      */
-    public function changeRecommend()
-    {
-        $id = $this->request->get('id');
-        $recommend = $this->request->get('recommend');
-        $res = Goods::update([
-            'id' => $id,
-            'recommend' => $recommend
-        ]);
-        if ($res === false) {
-            return $this->buildFailed(ReturnCode::UPDATE_FAILED, '更新失败');
-        } else {
-            return $this->buildSuccess([]);
-        }
-    }
-
-    /**
-     * 改变数据状态
-     */
     public function changeStatus()
     {
         $getData = $this->request->get();
-        $res = Goods::update([
+        $res = User::update([
             'id' => $getData['id'],
             'status' => $getData['status']
         ]);
@@ -105,7 +99,7 @@ class GoodsCon extends Base
         if (!$id) {
             return $this->buildFailed(ReturnCode::EMPTY_PARAMS, '缺少必要参数');
         }
-        $res = Goods::del($id);
+        $res = User::del($id);
         if ($res === false) {
             return $this->buildFailed(ReturnCode::DELETE_FAILED, '删除失败');
         } else {

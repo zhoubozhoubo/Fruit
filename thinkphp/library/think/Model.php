@@ -1749,6 +1749,36 @@ abstract class Model implements \JsonSerializable, \ArrayAccess
     }
 
     /**
+     * 删除记录（软删除）
+     * @access public
+     * @param mixed $data 主键列表 支持闭包查询条件
+     * @return integer 成功删除的记录数
+     */
+    public static function del($data)
+    {
+        $model = new static();
+        $query = $model->db();
+        if (empty($data) && 0 !== $data) {
+            return 0;
+        } elseif (is_array($data) && key($data) !== 0) {
+            $query->where($data);
+            $data = null;
+        } elseif ($data instanceof \Closure) {
+            call_user_func_array($data, [ & $query]);
+            $data = null;
+        }
+        $resultSet = $query->select($data);
+        $count     = 0;
+        if ($resultSet) {
+            foreach ($resultSet as $data) {
+                $result = $data->where('id',$data['id'])->update(['is_delete'=>1]);
+                $count += $result;
+            }
+        }
+        return $count;
+    }
+
+    /**
      * 删除记录
      * @access public
      * @param mixed $data 主键列表 支持闭包查询条件

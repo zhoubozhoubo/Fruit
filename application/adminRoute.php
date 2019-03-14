@@ -275,15 +275,86 @@ Route::group('admin', function () use ($afterBehavior) {
             ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);
+    //用户
+    Route::group('UserCon', [
+        'index' => [
+            'admin/UserCon/index',
+            ['method' => 'get']
+        ],
+        'aoe'   => [
+            'admin/UserCon/aoe',
+            ['method' => 'post']
+        ],
+        'changeStatus'   => [
+            'admin/UserCon/changeStatus',
+            ['method' => 'get']
+        ],
+        'del'   => [
+            'admin/UserCon/del',
+            ['method' => 'get']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
+    //商品类型
+    Route::group('GoodsTypeCon', [
+        'index' => [
+            'admin/GoodsTypeCon/index',
+            ['method' => 'get']
+        ],
+        'aoe'   => [
+            'admin/GoodsTypeCon/aoe',
+            ['method' => 'post']
+        ],
+        'changeStatus'   => [
+            'admin/GoodsTypeCon/changeStatus',
+            ['method' => 'get']
+        ],
+        'del'   => [
+            'admin/GoodsTypeCon/del',
+            ['method' => 'get']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
+    //商品
     Route::group('GoodsCon', [
         'index' => [
             'admin/GoodsCon/index',
             ['method' => 'get']
+        ],
+        'secondTypeList' => [
+            'admin/GoodsCon/secondTypeList',
+            ['method' => 'get']
+        ],
+        'aoe'   => [
+            'admin/GoodsCon/aoe',
+            ['method' => 'post']
+        ],
+        'changeRecommend'   => [
+            'admin/GoodsCon/changeRecommend',
+            ['method' => 'get']
+        ],
+        'changeStatus'   => [
+            'admin/GoodsCon/changeStatus',
+            ['method' => 'get']
+        ],
+        'del'   => [
+            'admin/GoodsCon/del',
+            ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);
-    Route::group('GoodsTypeCon', [
-        'index' => [
-            'admin/GoodsTypeCon/index',
+    //公共控制器
+    Route::group('Common', [
+        //商品一级类型列表
+        'firstGoodsTypeList' => [
+            'admin/Common/firstGoodsTypeList',
+            ['method' => 'get']
+        ],
+        //商品二级类型列表
+        'secondGoodsTypeList' => [
+            'admin/Common/secondGoodsTypeList',
+            ['method' => 'get']
+        ],
+        //地区列表
+        'area' => [
+            'admin/Common/area',
             ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);
