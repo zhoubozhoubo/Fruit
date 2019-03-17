@@ -278,13 +278,8 @@ Route::group('admin', function () use ($afterBehavior) {
     //公共控制器
     Route::group('Common', [
         //商品一级类型列表
-        'firstGoodsTypeList' => [
-            'admin/Common/firstGoodsTypeList',
-            ['method' => 'get']
-        ],
-        //商品二级类型列表
-        'secondGoodsTypeList' => [
-            'admin/Common/secondGoodsTypeList',
+        'goodsTypeList' => [
+            'admin/Common/goodsTypeList',
             ['method' => 'get']
         ],
         //地区列表

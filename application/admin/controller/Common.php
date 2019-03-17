@@ -11,24 +11,10 @@ use think\Db;
 class Common extends Base {
 
     /**
-     * 商品一级类型列表
+     * 商品类型列表
      */
-    public function firstGoodsTypeList() {
+    public function goodsTypeList() {
         $where = [
-            'fid'=>['=',0],
-            'status'=>1,
-            'is_delete'=>0
-        ];
-        $db=GoodsType::where($where)->field('id,name');
-        return parent::_list($db);
-    }
-
-    /**
-     * 商品二级类型列表
-     */
-    public function secondGoodsTypeList() {
-        $where = [
-            'fid'=>['<>',0],
             'status'=>1,
             'is_delete'=>0
         ];
