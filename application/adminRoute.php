@@ -275,6 +275,24 @@ Route::group('admin', function () use ($afterBehavior) {
             ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);
+    //公共控制器
+    Route::group('Common', [
+        //商品一级类型列表
+        'firstGoodsTypeList' => [
+            'admin/Common/firstGoodsTypeList',
+            ['method' => 'get']
+        ],
+        //商品二级类型列表
+        'secondGoodsTypeList' => [
+            'admin/Common/secondGoodsTypeList',
+            ['method' => 'get']
+        ],
+        //地区列表
+        'area' => [
+            'admin/Common/area',
+            ['method' => 'get']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
     //用户
     Route::group('UserCon', [
         'index' => [
@@ -342,10 +360,6 @@ Route::group('admin', function () use ($afterBehavior) {
             'admin/GoodsCon/index',
             ['method' => 'get']
         ],
-        'secondTypeList' => [
-            'admin/GoodsCon/secondTypeList',
-            ['method' => 'get']
-        ],
         'aoe'   => [
             'admin/GoodsCon/aoe',
             ['method' => 'post']
@@ -363,21 +377,22 @@ Route::group('admin', function () use ($afterBehavior) {
             ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);
-    //公共控制器
-    Route::group('Common', [
-        //商品一级类型列表
-        'firstGoodsTypeList' => [
-            'admin/Common/firstGoodsTypeList',
+    //订单
+    Route::group('OrdersCon', [
+        'index' => [
+            'admin/OrdersCon/index',
             ['method' => 'get']
         ],
-        //商品二级类型列表
-        'secondGoodsTypeList' => [
-            'admin/Common/secondGoodsTypeList',
+        'getGoods' => [
+            'admin/OrdersCon/getGoods',
             ['method' => 'get']
         ],
-        //地区列表
-        'area' => [
-            'admin/Common/area',
+        'send'   => [
+            'admin/OrdersCon/send',
+            ['method' => 'post']
+        ],
+        'refund'   => [
+            'admin/OrdersCon/refund',
             ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);

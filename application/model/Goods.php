@@ -38,8 +38,8 @@ class Goods extends Base
         return $value * 100;
     }
 
-    /**关联商品类型名称
-     * @return \think\model\relation\HasOne
+    /**
+     * 关联商品类型名称
      */
     public function goodsType()
     {

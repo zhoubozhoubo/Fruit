@@ -19,7 +19,7 @@ class GoodsTypeCon extends Base {
         $where = [
             'is_delete'=>0
         ];
-        $list = GoodsType::where($where)->field('id,fid,name,describe,sort,status')->order('sort', 'ASC')->select();
+        $list = GoodsType::where($where)->field('id,fid,name,img,describe,sort,status')->order('sort', 'ASC')->select();
         $list = Tools::buildArrFromObj($list);
         $list = formatTree(listToTree($list));
         return $this->buildSuccess([
