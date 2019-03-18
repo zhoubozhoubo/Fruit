@@ -32,6 +32,14 @@ class Orders extends Base
     }
 
     /**
+     * 关联物流公司信息
+     */
+    public function logisticsCompany()
+    {
+        return $this->hasOne('LogisticsCompany', 'id', 'logistics_company_id')->field('name');
+    }
+
+    /**
      * 关联订单地址信息
      */
     public function userAddress()

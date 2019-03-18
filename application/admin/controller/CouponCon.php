@@ -2,14 +2,13 @@
 
 namespace app\admin\controller;
 
-use app\model\Goods;
-use app\model\GoodsType;
+use app\model\Coupon;
 use app\util\ReturnCode;
 
 /**
- * 商品类型控制器
+ * 优惠券控制器
  */
-class GoodsTypeCon extends Base
+class CouponCon extends Base
 {
 
     /**
@@ -29,7 +28,7 @@ class GoodsTypeCon extends Base
                 $where[$key] = ['like', "%{$getData[$key]}%"];
             }
         }
-        $db = GoodsType::where($where)->field('id,name,img,describe,sort,status')->order('sort', 'ASC');
+        $db = Coupon::where($where)->field('id,name,full_money,reduce_money,term,describe,status');
         return parent::_list($db);
     }
 
@@ -40,9 +39,9 @@ class GoodsTypeCon extends Base
     {
         $postData = $this->request->post();
         if (!isset($postData['id']) || $postData['id'] === 0) {
-            $res = GoodsType::create($postData);
+            $res = Coupon::create($postData);
         } else {
-            $res = GoodsType::update($postData);
+            $res = Coupon::update($postData);
         }
         if ($res === false) {
             return $this->buildFailed(ReturnCode::DB_SAVE_ERROR, '操作失败');
@@ -57,7 +56,7 @@ class GoodsTypeCon extends Base
     public function changeStatus()
     {
         $getData = $this->request->get();
-        $res = GoodsType::update([
+        $res = Coupon::update([
             'id' => $getData['id'],
             'status' => $getData['status']
         ]);
@@ -77,12 +76,7 @@ class GoodsTypeCon extends Base
         if (!$id) {
             return $this->buildFailed(ReturnCode::EMPTY_PARAMS, '缺少必要参数');
         }
-        //删除类型时，判断商品类型下是否有商品
-        $goods = Goods::where(['type_id' => $id, 'is_delete' => 0])->count();
-        if ($goods) {
-            return $this->buildFailed(ReturnCode::DELETE_FAILED, '删除失败，该类型下存在商品');
-        }
-        $res = GoodsType::del($id);
+        $res = Coupon::del($id);
         if ($res === false) {
             return $this->buildFailed(ReturnCode::DELETE_FAILED, '删除失败');
         } else {

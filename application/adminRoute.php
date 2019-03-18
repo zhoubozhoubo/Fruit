@@ -277,7 +277,7 @@ Route::group('admin', function () use ($afterBehavior) {
     ], ['after_behavior' => $afterBehavior]);
     //公共控制器
     Route::group('Common', [
-        //商品一级类型列表
+        //商品类型列表
         'goodsTypeList' => [
             'admin/Common/goodsTypeList',
             ['method' => 'get']
@@ -285,6 +285,49 @@ Route::group('admin', function () use ($afterBehavior) {
         //地区列表
         'area' => [
             'admin/Common/area',
+            ['method' => 'get']
+        ],
+        //地区列表
+        'logisticsCompanyList' => [
+            'admin/Common/logisticsCompanyList',
+            ['method' => 'get']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
+    //物流公司
+    Route::group('LogisticsCompanyCon', [
+        'index' => [
+            'admin/LogisticsCompanyCon/index',
+            ['method' => 'get']
+        ],
+        'aoe'   => [
+            'admin/LogisticsCompanyCon/aoe',
+            ['method' => 'post']
+        ],
+        'changeStatus'   => [
+            'admin/LogisticsCompanyCon/changeStatus',
+            ['method' => 'get']
+        ],
+        'del'   => [
+            'admin/LogisticsCompanyCon/del',
+            ['method' => 'get']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
+    //优惠券
+    Route::group('CouponCon', [
+        'index' => [
+            'admin/CouponCon/index',
+            ['method' => 'get']
+        ],
+        'aoe'   => [
+            'admin/CouponCon/aoe',
+            ['method' => 'post']
+        ],
+        'changeStatus'   => [
+            'admin/CouponCon/changeStatus',
+            ['method' => 'get']
+        ],
+        'del'   => [
+            'admin/CouponCon/del',
             ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);
@@ -327,6 +370,17 @@ Route::group('admin', function () use ($afterBehavior) {
         ],
         'del'   => [
             'admin/UserAddressCon/del',
+            ['method' => 'get']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
+    //用户优惠券
+    Route::group('UserCouponCon', [
+        'index' => [
+            'admin/UserCouponCon/index',
+            ['method' => 'get']
+        ],
+        'del'   => [
+            'admin/UserCouponCon/del',
             ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);

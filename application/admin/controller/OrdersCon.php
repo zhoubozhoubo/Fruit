@@ -37,13 +37,14 @@ class OrdersCon extends Base
         }
 //        $db = Orders::hasWhere('userAddress', $userWhere)->where($where)->field('id,user_id,number,courier_company,courier_number,goods_money,freight_money,total_money,address_id,pay_time,status,gmt_create,gmt_modified');
         $db = Orders::hasWhere('userAddress', $userWhere)->where($where);
-        return parent::_list($db, ['user', 'userAddress']);
+        return parent::_list($db, ['user', 'logisticsCompany', 'userAddress']);
     }
 
     public function _index_data_filter(&$data)
     {
         foreach ($data as &$item) {
             $item['user_name'] = $item['user']['name'];
+            $item['logistics_company_name'] = $item['logisticsCompany']['name'];
             $item['orders_name'] = $item['userAddress']['name'];
             $item['orders_phone'] = $item['userAddress']['phone'];
             $item['orders_address'] = $item['userAddress']['province'] . '/' . $item['userAddress']['city'] . '/' . $item['userAddress']['area'] . '/' . $item['userAddress']['comment'];

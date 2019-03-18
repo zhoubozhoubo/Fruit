@@ -3,6 +3,7 @@
 namespace app\admin\controller;
 
 use app\model\GoodsType;
+use app\model\LogisticsCompany;
 use think\Db;
 
 /**
@@ -18,8 +19,20 @@ class Common extends Base {
             'status'=>1,
             'is_delete'=>0
         ];
-        $db=GoodsType::where($where)->field('id,name');
-        return parent::_list($db);
+        $res=GoodsType::where($where)->field('id,name')->order('sort ASC')->select();
+        return $this->buildSuccess($res);
+    }
+
+    /**
+     * 物流公司列表
+     */
+    public function logisticsCompanyList() {
+        $where = [
+            'status'=>1,
+            'is_delete'=>0
+        ];
+        $res=LogisticsCompany::where($where)->field('id,name')->order('sort ASC')->select();
+        return $this->buildSuccess($res);
     }
 
     /**
