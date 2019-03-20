@@ -3,8 +3,8 @@
 namespace app\model;
 
 /**
- * 地区model
+ * 基本配置model
  */
-class Area extends Base {
+class BasicConfig extends Base {
 
 }

@@ -445,5 +445,31 @@ Route::group('admin', function () use ($afterBehavior) {
             ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);
+    //基本配置
+    Route::group('BasicConfigCon', [
+        'index' => [
+            'admin/BasicConfigCon/index',
+            ['method' => 'get']
+        ],
+        'edit'   => [
+            'admin/BasicConfigCon/edit',
+            ['method' => 'post']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
+    //banner
+    Route::group('BannerCon', [
+        'index' => [
+            'admin/BannerCon/index',
+            ['method' => 'get']
+        ],
+        'edit'   => [
+            'admin/BannerCon/edit',
+            ['method' => 'post']
+        ],
+        'changeStatus'   => [
+            'admin/BannerCon/changeStatus',
+            ['method' => 'get']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
     Route::miss('admin/Miss/index');
 });
