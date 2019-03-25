@@ -27,4 +27,12 @@ class Coupon extends Base
     {
         return $value * 100;
     }
+
+    /**
+     * 关联优惠券类型名称
+     */
+    public function couponType()
+    {
+        return $this->hasOne('CouponType', 'id', 'type_id')->field('name');
+    }
 }

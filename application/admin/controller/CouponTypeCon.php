@@ -3,12 +3,13 @@
 namespace app\admin\controller;
 
 use app\model\Coupon;
+use app\model\CouponType;
 use app\util\ReturnCode;
 
 /**
- * 优惠券控制器
+ * 优惠券类型控制器
  */
-class CouponCon extends Base
+class CouponTypeCon extends Base
 {
 
     /**
@@ -28,15 +29,8 @@ class CouponCon extends Base
                 $where[$key] = ['like', "%{$getData[$key]}%"];
             }
         }
-        $db = Coupon::where($where)->field('id,name,type_id,full_money,reduce_money,term,describe,status');
-        return parent::_list($db, ['couponType']);
-    }
-
-    public function _index_data_filter(&$data)
-    {
-        foreach ($data as &$item) {
-            $item['type_name'] = $item['couponType']['name'];
-        }
+        $db = CouponType::where($where)->field('id,name,describe,status');
+        return parent::_list($db);
     }
 
     /**
@@ -46,9 +40,9 @@ class CouponCon extends Base
     {
         $postData = $this->request->post();
         if (!isset($postData['id']) || $postData['id'] === 0) {
-            $res = Coupon::create($postData);
+            $res = CouponType::create($postData);
         } else {
-            $res = Coupon::update($postData);
+            $res = CouponType::update($postData);
         }
         if ($res === false) {
             return $this->buildFailed(ReturnCode::DB_SAVE_ERROR, '操作失败');
@@ -63,7 +57,7 @@ class CouponCon extends Base
     public function changeStatus()
     {
         $getData = $this->request->get();
-        $res = Coupon::update([
+        $res = CouponType::update([
             'id' => $getData['id'],
             'status' => $getData['status']
         ]);
@@ -83,7 +77,12 @@ class CouponCon extends Base
         if (!$id) {
             return $this->buildFailed(ReturnCode::EMPTY_PARAMS, '缺少必要参数');
         }
-        $res = Coupon::del($id);
+        //删除优惠券类型时，判断优惠券类型下是否有优惠券
+        $coupon = Coupon::where(['type_id' => $id, 'is_delete' => 0])->count();
+        if ($coupon) {
+            return $this->buildFailed(ReturnCode::DELETE_FAILED, '删除失败，该类型下存在商品');
+        }
+        $res = CouponType::del($id);
         if ($res === false) {
             return $this->buildFailed(ReturnCode::DELETE_FAILED, '删除失败');
         } else {

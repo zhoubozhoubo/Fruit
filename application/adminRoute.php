@@ -282,6 +282,11 @@ Route::group('admin', function () use ($afterBehavior) {
             'admin/Common/goodsTypeList',
             ['method' => 'get']
         ],
+        //优惠券类型列表
+        'couponTypeList' => [
+            'admin/Common/couponTypeList',
+            ['method' => 'get']
+        ],
         //地区列表
         'area' => [
             'admin/Common/area',
@@ -309,6 +314,25 @@ Route::group('admin', function () use ($afterBehavior) {
         ],
         'del'   => [
             'admin/LogisticsCompanyCon/del',
+            ['method' => 'get']
+        ]
+    ], ['after_behavior' => $afterBehavior]);
+    //优惠券类型
+    Route::group('CouponTypeCon', [
+        'index' => [
+            'admin/CouponTypeCon/index',
+            ['method' => 'get']
+        ],
+        'aoe'   => [
+            'admin/CouponTypeCon/aoe',
+            ['method' => 'post']
+        ],
+        'changeStatus'   => [
+            'admin/CouponTypeCon/changeStatus',
+            ['method' => 'get']
+        ],
+        'del'   => [
+            'admin/CouponTypeCon/del',
             ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);

@@ -2,6 +2,7 @@
 
 namespace app\admin\controller;
 
+use app\model\CouponType;
 use app\model\GoodsType;
 use app\model\LogisticsCompany;
 use think\Db;
@@ -20,6 +21,18 @@ class Common extends Base {
             'is_delete'=>0
         ];
         $res=GoodsType::where($where)->field('id,name')->order('sort ASC')->select();
+        return $this->buildSuccess($res);
+    }
+
+    /**
+     * 优惠券类型列表
+     */
+    public function couponTypeList() {
+        $where = [
+            'status'=>1,
+            'is_delete'=>0
+        ];
+        $res=CouponType::where($where)->field('id,name')->select();
         return $this->buildSuccess($res);
     }
 
