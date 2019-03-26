@@ -372,6 +372,14 @@ Route::group('admin', function () use ($afterBehavior) {
         'del'   => [
             'admin/UserCon/del',
             ['method' => 'get']
+        ],
+        'getAddress'   => [
+            'admin/UserCon/getAddress',
+            ['method' => 'get']
+        ],
+        'getCoupon'   => [
+            'admin/UserCon/getCoupon',
+            ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);
     //用户地址

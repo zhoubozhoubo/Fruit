@@ -3,6 +3,8 @@
 namespace app\admin\controller;
 
 use app\model\User;
+use app\model\UserAddress;
+use app\model\UserCoupon;
 use app\util\ReturnCode;
 
 /**
@@ -105,6 +107,40 @@ class UserCon extends Base
             return $this->buildFailed(ReturnCode::DELETE_FAILED, '删除失败');
         } else {
             return $this->buildSuccess([]);
+        }
+    }
+
+    /**
+     * 获取用户收货地址
+     */
+    public function getAddress()
+    {
+        $getData = $this->request->get();
+        $where = [
+            'user_id' => $getData['user_id']
+        ];
+        $db = UserAddress::where($where)->field('id,name,phone,province,city,area,comment,is_default');
+        return parent::_list($db);
+    }
+
+    /**
+     * 获取用户优惠券
+     */
+    public function getCoupon()
+    {
+        $getData = $this->request->get();
+        $where = [
+            'user_id' => $getData['user_id']
+        ];
+        $db = UserCoupon::where($where)->field('id,coupon_id,start,end,is_use');
+        return parent::_list($db, ['coupon']);
+    }
+
+    public function _getCoupon_data_filter(&$data)
+    {
+        foreach ($data as &$item) {
+            $item['coupon_name'] = $item['coupon']['name'];
+            $item['coupon_term'] = $item['coupon']['term'];
         }
     }
 
