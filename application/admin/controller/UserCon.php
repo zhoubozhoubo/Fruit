@@ -30,7 +30,7 @@ class UserCon extends Base
                 $where[$key] = ['like', "%{$getData[$key]}%"];
             }
         }
-        $db = User::where($where)->field('id,name,nickname,avatarurl,phone,province,city,area,comment,status');
+        $db = User::where($where)->field('id,name,nickname,avatarurl,phone,province,city,area,comment,gmt_create,status');
         return parent::_list($db);
     }
 
