@@ -29,7 +29,7 @@ class GoodsTypeCon extends Base
                 $where[$key] = ['like', "%{$getData[$key]}%"];
             }
         }
-        $db = GoodsType::where($where)->field('id,name,img,describe,sort,status')->order('sort', 'ASC');
+        $db = GoodsType::where($where)->field('id,name,img,describe,sort,recommend,status')->order('sort', 'ASC');
         return parent::_list($db);
     }
 
@@ -46,6 +46,24 @@ class GoodsTypeCon extends Base
         }
         if ($res === false) {
             return $this->buildFailed(ReturnCode::DB_SAVE_ERROR, '操作失败');
+        } else {
+            return $this->buildSuccess([]);
+        }
+    }
+
+    /**
+     * 改变数据状态
+     */
+    public function changeRecommend()
+    {
+        $id = $this->request->get('id');
+        $recommend = $this->request->get('recommend');
+        $res = GoodsType::update([
+            'id' => $id,
+            'recommend' => $recommend
+        ]);
+        if ($res === false) {
+            return $this->buildFailed(ReturnCode::UPDATE_FAILED, '更新失败');
         } else {
             return $this->buildSuccess([]);
         }

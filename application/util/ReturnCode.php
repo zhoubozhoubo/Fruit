@@ -36,6 +36,8 @@ class ReturnCode {
     const UPDATE_FAILED = -22; // 更新记录失败
     const DATABASE_ERROR = -23; // 数据库对象错误
 
+    const METHOD_ERROR = -24; // 请求方式错误
+
     const PARAM_INVALID = -995; // 参数无效
     const ACCESS_TOKEN_TIMEOUT = -996;
     const SESSION_TIMEOUT = -997;

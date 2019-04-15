@@ -18,17 +18,7 @@ class Goods extends Base
         return number_format($value / 100, 2, '.', '');
     }
 
-    public function getOtherMoneyAttr($value)
-    {
-        return number_format($value / 100, 2, '.', '');
-    }
-
     public function setMoneyAttr($value)
-    {
-        return $value * 100;
-    }
-
-    public function setOtherMoneyAttr($value)
     {
         return $value * 100;
     }

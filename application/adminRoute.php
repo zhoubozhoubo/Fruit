@@ -426,6 +426,10 @@ Route::group('admin', function () use ($afterBehavior) {
             'admin/GoodsTypeCon/aoe',
             ['method' => 'post']
         ],
+        'changeRecommend'   => [
+            'admin/GoodsTypeCon/changeRecommend',
+            ['method' => 'get']
+        ],
         'changeStatus'   => [
             'admin/GoodsTypeCon/changeStatus',
             ['method' => 'get']
@@ -444,10 +448,6 @@ Route::group('admin', function () use ($afterBehavior) {
         'aoe'   => [
             'admin/GoodsCon/aoe',
             ['method' => 'post']
-        ],
-        'changeRecommend'   => [
-            'admin/GoodsCon/changeRecommend',
-            ['method' => 'get']
         ],
         'changeStatus'   => [
             'admin/GoodsCon/changeStatus',

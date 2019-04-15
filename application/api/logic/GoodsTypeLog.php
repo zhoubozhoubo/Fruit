@@ -1,19 +1,21 @@
 <?php
 
-namespace app\api\controller;
+namespace app\api\logic;
 
-class GoodsTypeCon extends Base
+use app\model\GoodsType;
+
+class GoodsTypeLog
 {
-    public function index()
+    public function getGoodsTypeListGoods()
     {
-        if(){
-
+        $where=[
+            'status'=>1,
+            'is_delete'=>0
+        ];
+        $db = GoodsType::where($where)->field('id,name,img')->order('sort ASC')->select();
+        foreach ($db as $item){
+            $item->goodsList;
         }
-        return $this->buildSuccess([
-            'Product' => config('apiAdmin.APP_NAME'),
-            'Version' => config('apiAdmin.APP_VERSION'),
-            'Company' => config('apiAdmin.COMPANY_NAME'),
-            'ToYou' => "I'm glad to meet you（终于等到你123！）"
-        ]);
+        return $db;
     }
 }
