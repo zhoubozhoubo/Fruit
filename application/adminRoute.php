@@ -380,6 +380,10 @@ Route::group('admin', function () use ($afterBehavior) {
         'getCoupon'   => [
             'admin/UserCon/getCoupon',
             ['method' => 'get']
+        ],
+        'getBag'   => [
+            'admin/UserCon/getBag',
+            ['method' => 'get']
         ]
     ], ['after_behavior' => $afterBehavior]);
     //用户地址

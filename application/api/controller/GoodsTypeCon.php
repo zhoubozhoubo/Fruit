@@ -2,8 +2,9 @@
 
 namespace app\api\controller;
 
-use app\util\ReturnCode;
-
+/**
+ * 商品类型控制器
+ */
 class GoodsTypeCon extends Base
 {
 
@@ -15,11 +16,12 @@ class GoodsTypeCon extends Base
         $this->goodsType = new \app\api\logic\GoodsTypeLog();
     }
 
+    /**
+     * 获取商品分类列表以及推荐分类下商品列表
+     */
     public function getGoodsTypeListGoods()
     {
-        if(!$this->request->isGet()){
-            return $this->buildFailed(ReturnCode::METHOD_ERROR, '请求方式错误');
-        }
+        $this->requestType();
         $res = $this->goodsType->getGoodsTypeListGoods();
         return $this->buildSuccess($res);
     }

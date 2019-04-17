@@ -13,7 +13,6 @@ class GoodsType extends Base
      */
     public function goodsList()
     {
-        return $this->hasMany('Goods', 'type_id', 'id')->field('id,name,img');
-//            ->with('goods');
+        return $this->hasMany('Goods', 'type_id', 'id')->field('id,name,img,describe,money,original_money,number');
     }
 }

@@ -29,7 +29,7 @@ class GoodsTypeCon extends Base
                 $where[$key] = ['like', "%{$getData[$key]}%"];
             }
         }
-        $db = GoodsType::where($where)->field('id,name,img,describe,sort,recommend,status')->order('sort', 'ASC');
+        $db = GoodsType::where($where)->field('id,name,img,describe,sort,recommend,status')->order('recommend DESC, sort ASC');
         return parent::_list($db);
     }
 

@@ -4,6 +4,7 @@ namespace app\admin\controller;
 
 use app\model\User;
 use app\model\UserAddress;
+use app\model\UserBag;
 use app\model\UserCoupon;
 use app\util\ReturnCode;
 
@@ -141,6 +142,28 @@ class UserCon extends Base
         foreach ($data as &$item) {
             $item['coupon_name'] = $item['coupon']['name'];
             $item['coupon_term'] = $item['coupon']['term'];
+        }
+    }
+
+    /**
+     * 获取用户购物袋
+     */
+    public function getBag()
+    {
+        $getData = $this->request->get();
+        $where = [
+            'user_id' => $getData['user_id']
+        ];
+        $db = UserBag::where($where)->field('id,goods_id,goods_num');
+        return parent::_list($db, ['goods']);
+    }
+
+    public function _getBag_data_filter(&$data)
+    {
+        foreach ($data as &$item) {
+            $item['goods_name'] = $item['goods']['name'];
+            $item['goods_img'] = $item['goods']['img'];
+            $item['goods_money'] = $item['goods']['money'];
         }
     }
 

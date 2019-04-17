@@ -32,7 +32,7 @@ class GoodsCon extends Base
                 $where[$key] = ['like', "%{$getData[$key]}%"];
             }
         }
-        $db = Goods::where($where)->field('id,name,img,describe,type_id,money,original_money,comment,number,status');
+        $db = Goods::where($where)->field('id,name,img,describe,type_id,money,original_money,comment,number,status')->order('gmt_create DESC');
         return parent::_list($db, ['goodsType']);
     }
 

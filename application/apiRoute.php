@@ -13,4 +13,4 @@ $afterBehavior = [
     '\app\api\behavior\ApiPermission',
     '\app\api\behavior\RequestFilter'
 ];
-Route::rule('api/5c8f365c71082','api/1', 'GET', ['after_behavior' => $afterBehavior]);Route::rule('api/5cb44c4f0ba5b','api/GoodsTypeCon/getGoodsTypeListGoods', 'GET', ['after_behavior' => $afterBehavior]);
+Route::rule('api/5c8f365c71082','api/1', 'GET', ['after_behavior' => $afterBehavior]);Route::rule('api/5cb44c4f0ba5b','api/GoodsTypeCon/getGoodsTypeListGoods', 'GET', ['after_behavior' => $afterBehavior]);Route::rule('api/5cb6946b3a801','api/api/GoodsCon/getGoodsList', 'GET', ['after_behavior' => $afterBehavior]);Route::rule('api/5cb6f3a202861','api/api/GoodsCon/getGoodsDetails', 'GET', ['after_behavior' => $afterBehavior]);

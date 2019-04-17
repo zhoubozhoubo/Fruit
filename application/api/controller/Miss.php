@@ -2,7 +2,6 @@
 
 namespace app\api\controller;
 
-
 use app\util\StrRandom;
 
 class Miss extends Base {

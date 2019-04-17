@@ -21,7 +21,7 @@ class ReturnCode {
     const JSON_PARSE_FAIL = -9;
     const TYPE_ERROR = -10;
     const NUMBER_MATCH_ERROR = -11;
-    const EMPTY_PARAMS = -12;
+    const EMPTY_PARAMS = -12; // 参数错误
     const DATA_EXISTS = -13;
     const AUTH_ERROR = -14;
 
