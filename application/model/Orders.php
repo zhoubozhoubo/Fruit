@@ -50,9 +50,9 @@ class Orders extends Base
     /**
      * 关联订单商品信息
      */
-    /*public function ordersGoods()
+    public function ordersGoods()
     {
         return $this->hasMany('OrdersGoods', 'orders_id', 'id')->field('goods_id,goods_num,total_money')
             ->with('goods');
-    }*/
+    }
 }

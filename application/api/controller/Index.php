@@ -2,17 +2,29 @@
 
 namespace app\api\controller;
 
-class Index extends Base {
-    public function index() {
-        $this->debug([
-            'TpVersion' => THINK_VERSION
-        ]);
+use app\api\logic\IndexLog;
 
-        return $this->buildSuccess([
-            'Product'    => config('apiAdmin.APP_NAME'),
-            'Version'    => config('apiAdmin.APP_VERSION'),
-            'Company'    => config('apiAdmin.COMPANY_NAME'),
-            'ToYou'      => "I'm glad to meet you（终于等到你！）"
-        ]);
+/**
+ * 首页控制器
+ */
+class Index extends Base
+{
+
+    public $index;
+
+    public function _initialize()
+    {
+        parent::_initialize();
+        $this->index = new IndexLog();
+    }
+
+    /**
+     * 获取banner列表
+     */
+    public function getBannerList()
+    {
+        $this->requestType();
+        $res = $this->index->getBannerList();
+        return $this->buildSuccess($res);
     }
 }

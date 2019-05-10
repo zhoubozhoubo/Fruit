@@ -2,6 +2,7 @@
 
 namespace app\api\controller;
 
+use app\api\logic\GoodsLog;
 use app\util\ReturnCode;
 
 /**
@@ -15,7 +16,7 @@ class GoodsCon extends Base
     public function _initialize()
     {
         parent::_initialize();
-        $this->goods = new \app\api\logic\GoodsLog();
+        $this->goods = new GoodsLog();
     }
 
     /**
@@ -24,7 +25,7 @@ class GoodsCon extends Base
     public function getGoodsList()
     {
         $this->requestType();
-        $goodsTypeId = $this->request->get('goodsTypeId', 0);
+        $goodsTypeId = $this->request->get('goodsTypeId');
         if(!$goodsTypeId){
             return $this->buildFailed(ReturnCode::EMPTY_PARAMS,'参数缺失');
         }
@@ -37,7 +38,7 @@ class GoodsCon extends Base
      */
     public function getGoodsDetails(){
         $this->requestType();
-        $goodsId = $this->request->get('goodsId', 0);
+        $goodsId = $this->request->get('goodsId');
         if(!$goodsId){
             return $this->buildFailed(ReturnCode::EMPTY_PARAMS,'参数缺失');
         }

@@ -8,6 +8,11 @@ namespace app\model;
 class Coupon extends Base
 {
 
+    public function getConditionMoneyAttr($value)
+    {
+        return number_format($value / 100, 2, '.', '');
+    }
+
     public function getFullMoneyAttr($value)
     {
         return number_format($value / 100, 2, '.', '');
@@ -16,6 +21,11 @@ class Coupon extends Base
     public function getReduceMoneyAttr($value)
     {
         return number_format($value / 100, 2, '.', '');
+    }
+
+    public function setConditionMoneyAttr($value)
+    {
+        return $value * 100;
     }
 
     public function setFullMoneyAttr($value)

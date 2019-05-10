@@ -37,6 +37,7 @@ class UserAddressCon extends Base
     {
         foreach ($data as &$item) {
             $item['area_com'] = [$item['province'], $item['city'], $item['area']];
+            //过滤
             $item['area_com']=array_filter($item['area_com']);
         }
     }

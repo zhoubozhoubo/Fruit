@@ -28,7 +28,7 @@ class CouponCon extends Base
                 $where[$key] = ['like', "%{$getData[$key]}%"];
             }
         }
-        $db = Coupon::where($where)->field('id,name,type_id,full_money,reduce_money,term,describe,status');
+        $db = Coupon::where($where)->field('id,name,type_id,condition_money,full_money,reduce_money,term,describe,status');
         return parent::_list($db, ['couponType']);
     }
 

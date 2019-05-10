@@ -11,24 +11,48 @@ class GoodsTypeLog
 {
 
     /**
-     * 获取商品分类列表以及推荐分类下商品列表
+     * 获取未推荐商品分类列表
+     * @return array|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
-    public function getGoodsTypeListGoods()
+    public function getGoodsTypeList()
     {
         $where = [
+            'recommend' => 0,
             'status' => 1,
             'is_delete' => 0
         ];
         $db = GoodsType::where($where)->field('id,name,img,recommend')->order('recommend DESC, sort ASC')->select();
-        if($db){
+        if ($db) {
+            return $db;
+        } else {
+            return [];
+        }
+    }
+
+    /**
+     * 获取推荐商品分类以及分类下商品列表
+     * @return array|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getGoodsTypeListGoods()
+    {
+        $where = [
+            'recommend' => 1,
+            'status' => 1,
+            'is_delete' => 0
+        ];
+        $db = GoodsType::where($where)->field('id,name,img,recommend')->order('recommend DESC, sort ASC')->select();
+        if ($db) {
             foreach ($db as $item) {
-                // 当商品分类为推荐时查询分类下商品列表
-                if ($item['recommend'] === 1) {
-                    $item->goodsList;
-                }
+                $item->goodsList;
             }
             return $db;
-        }else{
+        } else {
             return [];
         }
     }
